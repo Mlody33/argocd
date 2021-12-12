@@ -33,6 +33,6 @@ spec:
     app: parser
   ports:
     - protocol: TCP
-      port: 80
+      port: 8040
       targetPort: 8095
   type: LoadBalancer
