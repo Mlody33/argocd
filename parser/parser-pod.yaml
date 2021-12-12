@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: parser-deployment
+  labels:
+    app: parser
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: parser
+  template:
+    metadata:
+      labels:
+        app: parser
+    spec:
+      containers:
+        - name: parser
+          image: mlodyajdza/parser:0.3.0
+          ports:
+          - containerPort: 8095
+            protocol: TCP
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: parser
+spec:
+  selector:
+    app: parser
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8095
+  type: LoadBalancer
